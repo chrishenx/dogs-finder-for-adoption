@@ -24,7 +24,7 @@ export const SortModes = {
   ASC: "asc"
 }
 
-const DogSorter = ({ sortBy, sortMode, onSortByChange, onSortModeChange }) => {
+export const DogSorter = ({ sortBy, sortMode, onSortByChange, onSortModeChange }) => {
   const isDescSortMode = sortMode === SortModes.DESC;
 
   const handleSortByChange = createEventTargetValueExtractor(onSortByChange)

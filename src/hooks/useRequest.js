@@ -1,6 +1,6 @@
 import { useAuth } from 'base-shell/lib/providers/Auth';
-import { useState } from 'react';
-import useDeepCompareEffect from 'use-deep-compare-effect';
+import { useEffect, useState } from 'react';
+import { useDeepCompareCallback } from 'use-deep-compare';
 import { request } from 'utils';
 
 /**
@@ -11,33 +11,35 @@ import { request } from 'utils';
  * @param {Object} params.body
  * @param {('GET' | 'POST' | 'PUT')} params.method
  */
-export function useRequest(path, initialData, params = {}) {
+export function useRequest(path, initialData, params = {}, manual = false) {
   const [data, setData] = useState(initialData);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!manual);
   const [error, setError] = useState(null);
   const { setAuth } = useAuth()
 
-  useDeepCompareEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await request(path, params);
-        if (response.status === 200) {
-          setData(await response.json());
-        } else {
-          if (response.status === 401) {
-            setAuth({ isAuthenticated: false })
-          }
-          throw new Error(`Error! status: ${response.status}`);
+  const fetchData = useDeepCompareCallback(async () => {
+    try {
+      const response = await request(path, params);
+      if (response.status === 200) {
+        setData(await response.json());
+      } else {
+        if (response.status === 401) {
+          setAuth({ isAuthenticated: false })
         }
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
+        throw new Error(`Error! status: ${response.status}`);
       }
+      setLoading(false);
+    } catch (error) {
+      setError(error);
+      setLoading(false);
     }
-
-    fetchData();
   }, [path, params]);
 
-  return { data, loading, error };
+  useEffect(() => {
+    if (!manual) {
+      fetchData();
+    }
+  }, [fetchData, manual]);
+
+  return { data, loading, error, performRequest: fetchData };
 }

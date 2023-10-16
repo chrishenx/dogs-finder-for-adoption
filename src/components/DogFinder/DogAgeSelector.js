@@ -7,7 +7,7 @@ export const DogAgeRangeLimits = {
   MAX: 20,
 }
 
-const DogAgeRangeSelector = ({ ageRange, onAgeRangeChanged }) => {
+export const DogAgeRangeSelector = ({ ageRange, onAgeRangeChanged }) => {
   const handleAgeRangeChange = (_, newValue) => {
     onAgeRangeChanged({ageMin: newValue[0], ageMax: newValue[1]})
   };

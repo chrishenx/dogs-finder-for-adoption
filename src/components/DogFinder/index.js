@@ -1,26 +1,28 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Container,
   Grid,
   TablePagination,
   Paper,
   Stack,
+  Divider,
 } from "@mui/material";
 import DogFilterer from "./DogFilterer";
 import { useConfig } from "base-shell/lib/providers/Config";
-import DogSorter, { SortFields, SortModes } from "./DogSorter";
+import { SortFields, SortModes, DogSorter } from "./DogSorter";
 import { createEventTargetValueExtractor } from "utils";
 import { DogResults } from "./DogResults";
 import { useRequest } from "hooks/useRequest";
-import DogAgeRangeSelector, { DogAgeRangeLimits } from "./DogAgeSelector";
+import { DogAgeRangeSelector, DogAgeRangeLimits } from "./DogAgeSelector";
+import { FavoriteDogs } from "./FavoriteDogs";
 
 const DEFAULT_DOGS_PER_PAGE = 25;
 
 const DogFinderView = () => {
   const { appConfig } = useConfig()
 
-  const [favoriteDogs, setFavoriteDogs] = useState(new Set());
+  const [favoriteDogIds, setFavoriteDogIds] = useState(new Set());
 
   const [breeds, setBreeds] = useState([]);
   const [sortBy, setSortBy] = useState(SortFields.BREED);
@@ -48,16 +50,16 @@ const DogFinderView = () => {
     setCurrentPage(value);
   };
 
-  const isFavoriteDog = (dog) => favoriteDogs.has(dog.id);
+  const isFavoriteDog = (dog) => favoriteDogIds.has(dog.id);
 
   const handleToggleFavoriteDog = (dog) => {
-    const favoriteDogsCopy = new Set(favoriteDogs)
+    const favoriteDogsCopy = new Set(favoriteDogIds)
     if (isFavoriteDog(dog)) {
       favoriteDogsCopy.delete(dog.id)
     } else {
       favoriteDogsCopy.add(dog.id);
     }
-    setFavoriteDogs(favoriteDogsCopy)
+    setFavoriteDogIds(favoriteDogsCopy)
   }
 
   return (
@@ -70,6 +72,8 @@ const DogFinderView = () => {
                 <DogFilterer selectedBreeds={breeds} onSelectedBreedsChanged={setBreeds} />
                 <DogAgeRangeSelector ageRange={ageRange} onAgeRangeChanged={setAgeRange} />
                 <DogSorter sortBy={sortBy} sortMode={sortMode} onSortByChange={setSortBy} onSortModeChange={setSortMode} />
+                <Divider />
+                <FavoriteDogs favoriteDogIds={favoriteDogIds} onRemoveFavoriteDog={handleToggleFavoriteDog} />
               </Stack>
             </Grid>
             <Grid item xs={9}>

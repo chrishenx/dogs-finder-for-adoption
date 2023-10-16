@@ -25,7 +25,7 @@ const messages = defineMessages({
     * Our app makes it easy to find the perfect dog for you.
     * Start living your best life together.
   `,
-  home: 'Amazing dog finder',
+  home: 'Amaing dog finder',
   page_not_found: 'Page not found',
   settings: 'Settings',
   theme: 'Theme',
