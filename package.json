@@ -14,6 +14,7 @@
     "lp-react-virtualized-auto-sizer-react-18": "^1.0.7",
     "material-ui-shell": "^3.4.14",
     "notistack": "^2.0.8",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-custom-scrollbars-2": "^4.5.0",
     "react-dom": "^18.2.0",
@@ -23,7 +24,8 @@
     "react-markdown": "^8.0.7",
     "react-router-dom": "^6.16.0",
     "react-scripts": "5.0.1",
-    "react-window": "^1.8.9"
+    "react-window": "^1.8.9",
+    "use-deep-compare-effect": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",

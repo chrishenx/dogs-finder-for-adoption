@@ -1,10 +1,23 @@
 import red from '@mui/material/colors/red'
 import green from '@mui/material/colors/green'
 import pink from '@mui/material/colors/pink'
+import deepPurple from "@mui/material/colors/deepPurple"
 
 const themes = [
   {
     id: 'default',
+    color: deepPurple[500],
+    source: {
+      palette: {
+        primary: {
+          main: "#6504b5",
+        },
+        secondary: {
+          main: "#4169E1",
+        },
+        error: red,
+      },
+    },
   },
   {
     id: 'red',

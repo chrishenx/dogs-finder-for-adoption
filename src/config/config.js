@@ -15,8 +15,9 @@ const config = {
     Loading,
     Menu: lazy(() => import('material-ui-shell/lib/containers/Menu/Menu')),
   },
-  auth: {
-    signInURL: '/signin',
+  baseUrl: 'https://frontend-take-home-service.fetch.com',
+  api: {
+    signIn: '/auth/login',
   },
   pwa: {
     useiOSPWAPrompt: true,
@@ -25,7 +26,7 @@ const config = {
   routes,
   locale: {
     locales,
-    defaultLocale: parseLanguages(['en', 'de', 'ru'], 'en'),
+    defaultLocale: parseLanguages(['en', 'es'], 'en'),
     onError: (e) => {
       // Here we warn the user about translation error
       //console.warn(e)

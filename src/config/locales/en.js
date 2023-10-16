@@ -6,11 +6,26 @@ const messages = defineMessages({
   sign_out: 'Sign out',
   sign_up: 'Sign up',
   email: 'Email',
-  username: 'Username',
+  name: 'Name',
   // deepcode ignore NoHardcodedPasswords: intended
   password: 'Password',
   about: 'About',
-  home: 'Home',
+  aboutPageHeader: "Amazing dog finder",
+  aboutPageMarkdown: `
+# This app lets you
+
+* **Find the perfect dog for you.**
+    * Browse through a large selection of dogs.
+    * Filter by breed.
+    * Add your favorites to a list.
+    * Generate a match based on your favorites.
+* **Stay organized and productive.**
+    * Keep track of your favorite dogs and matches in one place.
+* **Have fun and find your furry best friend.**
+    * Our app makes it easy to find the perfect dog for you.
+    * Start living your best life together.
+  `,
+  home: 'Amazing dog finder',
   page_not_found: 'Page not found',
   settings: 'Settings',
   theme: 'Theme',
@@ -19,8 +34,7 @@ const messages = defineMessages({
   green: 'Green',
   language: 'Language',
   en: 'English',
-  de: 'German',
-  ru: 'Russian',
+  es: 'Spanish',
   menu: 'Menu',
   menu_mini_mode: 'Mini menu',
   offline: 'Offline',
@@ -35,15 +49,7 @@ const messages = defineMessages({
   toast_demo: 'Demo toast',
   filter_demo: 'Demo filter',
   list_page_demo: 'List Page demo with {count} rows',
-  forgot_password: 'Forgot password',
-  password_reset: 'Password reset',
-  password_confirm: 'Password confirm',
-  registration: 'Registration',
   my_account: 'My account',
-  delete_account_dialog_title: 'Delete Account?',
-  delete_account_dialog_message:
-    'Your account will be deleted and you will lose all your data!',
-  delete_account_dialog_action: 'Delete account',
 })
 
 export default messages
