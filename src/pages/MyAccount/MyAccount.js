@@ -4,21 +4,7 @@ import Page from 'material-ui-shell/lib/containers/Page/Page'
 import React from 'react'
 import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useIntl } from 'react-intl'
-
-/**
- * 
- * @param {string} string 
- * @returns 
- */
-function extractFirstLetters(string) {
-  const words = string.split(" ")
-  if (words.length < 1) {
-    return ""
-  }
-
-  const firstLetters = words.map((word) => word[0])
-  return firstLetters.slice(0, 2).join("")
-}
+import { extractFirstLetters } from 'utils'
 
 const MyAccount = () => {
   const intl = useIntl()

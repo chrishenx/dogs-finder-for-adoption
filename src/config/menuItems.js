@@ -15,6 +15,8 @@ import {
 
 import allLocales from './locales'
 import allThemes from './themes'
+import { Avatar } from '@mui/material'
+import { extractFirstLetters } from 'utils'
 
 const getMenuItems = (props) => {
   const {
@@ -67,7 +69,12 @@ const getMenuItems = (props) => {
           id: 'my_account',
           defaultMessage: 'My Account',
         }),
-        leftIcon: <AccountBoxIcon />,
+        leftIcon: <Avatar
+          style={{ width: 40, height: 40 }}
+          alt={auth.name}
+        >
+          {auth.name ? extractFirstLetters(auth.name) : <AccountBoxIcon />}
+        </Avatar>
       },
       {
         value: '/signin',

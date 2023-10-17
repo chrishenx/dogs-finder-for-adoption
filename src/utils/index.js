@@ -35,3 +35,18 @@ export async function request(path, params = {}) {
   });
   return response;
 }
+
+/**
+ * Extracts the first two letters of the words in a string.
+ * @param {string} string - The input string to extract the first letters from.
+ * @returns {string} The first two letters of the input string.
+ */
+export function extractFirstLetters(string) {
+  const words = string.split(" ")
+  if (words.length < 1) {
+    return ""
+  }
+
+  const firstLetters = words.map((word) => word[0])
+  return firstLetters.slice(0, 2).join("")
+}
