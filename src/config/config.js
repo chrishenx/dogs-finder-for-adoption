@@ -18,6 +18,10 @@ const config = {
   baseUrl: 'https://frontend-take-home-service.fetch.com',
   api: {
     signIn: '/auth/login',
+    breeds: '/breeds',
+    dogSearch: '/dogs/search',
+    dogDetails: '/dogs',
+    dogMatch: '/dogs/match',
   },
   pwa: {
     useiOSPWAPrompt: true,

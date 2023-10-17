@@ -8,6 +8,7 @@ import { useRequest } from "hooks/useRequest";
 import { getDogImgAltText, intlBoldify } from "../utils";
 import PropTypes from 'prop-types';
 import { useIntl } from "react-intl";
+import { useConfig } from "base-shell/lib/providers/Config";
 
 const { Typography, CircularProgress, Box, Card, CardMedia, CardContent, CardHeader } = require("@mui/material");
 
@@ -19,13 +20,14 @@ const { Typography, CircularProgress, Box, Card, CardMedia, CardContent, CardHea
  * @param {string} props.dogId - The ID of the dog to match.
  */
 export const DogMatch = ({ dogId }) => {
-  const { data: [dog], loading } = useRequest(`/dogs`, [{}], { method: 'POST', body: [dogId] });
+  const { appConfig } = useConfig()
+  const { data: [dog], loading } = useRequest(appConfig.api.dogDetails, [{}], { method: 'POST', body: [dogId] });
   const intl = useIntl()
 
   return <>
     {loading ? (
       <Box>
-        <Typography variant="h6" component="h2">
+        <Typography variant="h6" component="h3">
           {intl.formatMessage({ id: 'components.dogMatch.loading.title' })}
         </Typography>
         <CircularProgress />
@@ -33,7 +35,7 @@ export const DogMatch = ({ dogId }) => {
     ) :
       <Card elevation={20} raised>
         <CardHeader sx={{ textAlign: 'center', bgcolor: 'primary.main', fontWeight: "500" }}
-          title={<Typography variant="h3" component="h1" color="white">{intl.formatMessage({ id: 'components.dogMatch.cardHeader' })}</Typography>}
+          title={<Typography variant="h4" component="h1" color="white">{intl.formatMessage({ id: 'components.dogMatch.cardHeader' })}</Typography>}
         />
         <CardMedia image={dog.img} title={getDogImgAltText(dog)} sx={{ height: 450 }} />
         <CardContent>

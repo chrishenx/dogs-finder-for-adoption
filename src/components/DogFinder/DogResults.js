@@ -1,3 +1,4 @@
+import { useConfig } from "base-shell/lib/providers/Config";
 import { useRequest } from "hooks/useRequest";
 import PropTypes from 'prop-types';
 
@@ -13,7 +14,8 @@ const { DogCard } = require("./DogCard");
  * @returns {JSX.Element} - React component representing the list of dog cards.
  */
 export const DogResults = ({ dogIds, isFavoriteDog, onToggleFavoriteDog }) => {
-  const { data: dogs, loading } = useRequest('/dogs', [], { method: 'POST', body: dogIds });
+  const { appConfig } = useConfig()
+  const { data: dogs } = useRequest(appConfig.api.dogDetails, [], { method: 'POST', body: dogIds });
 
   return <>
     {dogs.map((dog) => (

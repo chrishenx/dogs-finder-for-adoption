@@ -16,12 +16,17 @@ import { DogResults } from "./DogResults";
 import { useRequest } from "hooks/useRequest";
 import { DogAgeRangeSelector, DogAgeRangeLimits } from "./DogAgeSelector";
 import { FavoriteDogs } from "./FavoriteDogs";
+import { useConfig } from "base-shell/lib/providers/Config";
 
 const DEFAULT_DOGS_PER_PAGE = 24;
 
+/**
+ * A component that displays a list of dogs that can be filtered, sorted, and paginated.
+ */
 const DogFinderView = () => {
-  const [favoriteDogIds, setFavoriteDogIds] = useState(new Set());
+  const { appConfig } = useConfig()
 
+  const [favoriteDogIds, setFavoriteDogIds] = useState(new Set());
   const [breeds, setBreeds] = useState(null); // Should be an array, but the search endpoint doesn't support multiple breeds from my testing
   const [sortBy, setSortBy] = useState(SortFields.BREED);
   const [sortMode, setSortMode] = useState(SortModes.ASC);
@@ -29,7 +34,7 @@ const DogFinderView = () => {
   const [dogsPerPage, setDogsPerPage] = useState(DEFAULT_DOGS_PER_PAGE);
   const [ageRange, setAgeRange] = useState({ ageMin: DogAgeRangeLimits.MIN, ageMax: DogAgeRangeLimits.MAX });
 
-  const { data: dogSearchResults, loading } = useRequest('/dogs/search', { next: undefined, resultIds: [], total: 0 }, {
+  const { data: dogSearchResults, loading } = useRequest(appConfig.api.dogSearch, { next: undefined, resultIds: [], total: 0 }, {
     search: {
       from: currentPage * dogsPerPage,
       size: dogsPerPage,

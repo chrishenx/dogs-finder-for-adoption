@@ -3,14 +3,19 @@ import { Box, Button, CircularProgress, Modal, Typography } from '@mui/material'
 import { useRequest } from 'hooks/useRequest';
 import { DogMatch } from './DogMatch';
 import { useIntl } from 'react-intl';
+import { useConfig } from 'base-shell/lib/providers/Config';
 
 function DogMatcher({ dogIds }) {
+  const { appConfig } = useConfig()
   const intl = useIntl()
   const [open, setOpen] = useState(false);
-  const { data: { match: matchedDogId }, loading, performRequest } = useRequest('/dogs/match', { match: null }, {
-    method: 'POST',
-    body: [...dogIds]
-  }, true);
+  const { data: { match: matchedDogId }, loading, performRequest } = useRequest(appConfig.api.dogMatch, { match: null },
+    {
+      method: 'POST',
+      body: [...dogIds]
+    },
+    true
+  );
 
   const generateMatch = () => {
     setOpen(true)

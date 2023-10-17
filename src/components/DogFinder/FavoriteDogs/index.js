@@ -8,6 +8,7 @@ import { getDogImgAltText } from "../utils";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import DogMatcher from "./DogMatcher";
 import { useIntl } from "react-intl";
+import { useConfig } from "base-shell/lib/providers/Config";
 
 /**
  * @param {Object} props
@@ -15,8 +16,9 @@ import { useIntl } from "react-intl";
  * @param {function} props.onRemoveFavoriteDog - A function to remove a favorite dog.
  */
 export const FavoriteDogs = ({ favoriteDogIds, onRemoveFavoriteDog }) => {
+  const { appConfig } = useConfig()
   const intl = useIntl()
-  const { data: favoriteDogs } = useRequest('/dogs', [], { method: 'POST', body: [...favoriteDogIds] })
+  const { data: favoriteDogs } = useRequest(appConfig.api.dogDetails, [], { method: 'POST', body: [...favoriteDogIds] })
 
   return (
     <Box>
