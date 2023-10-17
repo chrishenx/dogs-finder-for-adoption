@@ -7,10 +7,12 @@ import {
   MenuItem,
   IconButton,
   Grid,
+  Tooltip,
 } from "@mui/material";
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import { createEventTargetValueExtractor } from "utils";
+import { useIntl } from "react-intl";
 
 export const SortFields = {
   BREED: "breed",
@@ -24,8 +26,18 @@ export const SortModes = {
   ASC: "asc"
 }
 
+/**
+ * A component that allows the user to sort a list of dogs by breed, name or age.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.sortBy - The current sort criteria.
+ * @param {string} props.sortMode - The current sort mode (either "asc" or "desc").
+ * @param {Function} props.onSortByChange - A callback function to be called when the sort criteria changes.
+ * @param {Function} props.onSortModeChange - A callback function to be called when the sort mode changes.
+ */
 export const DogSorter = ({ sortBy, sortMode, onSortByChange, onSortModeChange }) => {
   const isDescSortMode = sortMode === SortModes.DESC;
+  const intl = useIntl()
 
   const handleSortByChange = createEventTargetValueExtractor(onSortByChange)
   const toggleSortMode = () => onSortModeChange(isDescSortMode ? SortModes.ASC : SortModes.DESC)
@@ -34,26 +46,27 @@ export const DogSorter = ({ sortBy, sortMode, onSortByChange, onSortModeChange }
     <Grid container >
       <Grid item xs={9}>
         <FormControl fullWidth>
-          <InputLabel>Sort by:</InputLabel>
+          <InputLabel>{intl.formatMessage({ id: 'components.dogSorter.label' })}</InputLabel>
           <Select
-            label="Sort dogs by" /* TODO Change with Intl key */
+            label={intl.formatMessage({ id: 'components.dogSorter.label' })}
             value={sortBy}
             onChange={handleSortByChange}
-          /* MenuProps={{ slotProps: { paper: { style } } }} */
           >
-            <MenuItem value="breed">Breed</MenuItem>
-            <MenuItem value="name">Name</MenuItem>
-            <MenuItem value="age">Age</MenuItem>
+            <MenuItem value="breed">{intl.formatMessage({ id: 'components.dogSorter.sortBy.breed' })}</MenuItem>
+            <MenuItem value="name">{intl.formatMessage({ id: 'components.dogSorter.sortBy.name' })}</MenuItem>
+            <MenuItem value="age">{intl.formatMessage({ id: 'components.dogSorter.sortBy.age' })}</MenuItem>
           </Select>
         </FormControl>
       </Grid>
       <Grid item xs={1}><div></div></Grid>
       <Grid item xs={2}>
-        <IconButton onClick={toggleSortMode} aria-label={isDescSortMode ? "Set ascending sort mode" : "Set descending sort mode"}>
-          {
-            isDescSortMode ? <KeyboardDoubleArrowUpIcon /> : <KeyboardDoubleArrowDownIcon />
-          }
-        </IconButton>
+        <Tooltip title={isDescSortMode ? intl.formatMessage({ id: 'components.dogSorter.tooltipSetAscMode' }) : intl.formatMessage({ id: 'components.dogSorter.tooltipSetDescMode' })} arrow placement="top">
+          <IconButton onClick={toggleSortMode}>
+            {
+              isDescSortMode ? <KeyboardDoubleArrowUpIcon /> : <KeyboardDoubleArrowDownIcon />
+            }
+          </IconButton>
+        </Tooltip>
       </Grid>
     </Grid>
   );

@@ -1,6 +1,7 @@
+import { flattenMessages } from 'components/DogFinder/utils'
 import { defineMessages } from 'react-intl'
 
-const messages = defineMessages({
+const messages = defineMessages(flattenMessages({
   app_name: 'Awesome Dog Finder',
   cancel: 'Cancel',
   sign_in: 'Iniciar sesión',
@@ -52,7 +53,59 @@ const messages = defineMessages({
   toast_demo: "Demo de toast",
   filter_demo: "Demo de filtro",
   list_page_demo: "Demo de página de lista con {count} filas",
-  my_account: "Mi cuenta"
-})
+  my_account: "Mi cuenta",
+  components: {
+    dogMatch: {
+      loading: {
+        title: 'Cargando tu perro perfecto...',
+      },
+      cardHeader: '¡Tu perro perfecto está aquí!',
+      cardContent: {
+        dogDescription: 'Un hermoso <b>{breed}</b>, de <b>{age}</b> años de edad te está esperando.',
+        zipCode: 'Ubicado en el código postal <b>{zipCode}</b>.',
+      },
+    },
+    dogMatcher: {
+      button: 'Encuentra a mi perro perfecto!',
+      modal: {
+        title: 'Buscando tu perro perfecto...',
+      },
+    },
+    dogAgeSelector: {
+      ageRange: 'Rango de edad',
+    },
+    dogCard: {
+      content: {
+        breed: 'Raza: <b>{breed}</b>',
+        age: 'Edad: <b>{age}</b>',
+        zipCode: 'Código postal: <b>{zipCode}</b>',
+      },
+      actions: {
+        remove: 'Eliminar',
+        add: 'Agregar',
+      },
+    },
+    dogFilterer: {
+      breedSelector: {
+        label: 'Raza',
+        placeholder: 'Busca una raza',
+      },
+    },
+    dogSorter: {
+      label: 'Ordenar por',
+      sortBy: {
+        breed: 'Raza',
+        name: 'Nombre',
+        age: 'Edad',
+      },
+      tooltipSetAscMode: 'Establecer modo de orden ascendente',
+      tooltipSetDescMode: 'Establecer modo de orden descendente',
+    },
+    favoriteDogs: {
+      empty: 'Agrega algunos perros para encontrar una increíble coincidencia de adopción!',
+      tooltipRemoveFromFavorites: 'Eliminar {dogName} de favoritos',
+    },
+  }
+}))
 
 export default messages

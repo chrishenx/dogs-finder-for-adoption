@@ -7,9 +7,9 @@ import {
   Paper,
   Stack,
   Divider,
+  CircularProgress,
 } from "@mui/material";
-import DogFilterer from "./DogFilterer";
-import { useConfig } from "base-shell/lib/providers/Config";
+import { DogFilterer } from "./DogFilterer";
 import { SortFields, SortModes, DogSorter } from "./DogSorter";
 import { createEventTargetValueExtractor } from "utils";
 import { DogResults } from "./DogResults";
@@ -20,11 +20,9 @@ import { FavoriteDogs } from "./FavoriteDogs";
 const DEFAULT_DOGS_PER_PAGE = 25;
 
 const DogFinderView = () => {
-  const { appConfig } = useConfig()
-
   const [favoriteDogIds, setFavoriteDogIds] = useState(new Set());
 
-  const [breeds, setBreeds] = useState([]);
+  const [breeds, setBreeds] = useState(null); // Should be an array, but the search endpoint doesn't support multiple breeds from my testing
   const [sortBy, setSortBy] = useState(SortFields.BREED);
   const [sortMode, setSortMode] = useState(SortModes.ASC);
   const [currentPage, setCurrentPage] = useState(0);
@@ -78,7 +76,14 @@ const DogFinderView = () => {
             </Grid>
             <Grid item xs={9}>
               <Grid container spacing={2}>
-                <DogResults dogIds={dogSearchResults.resultIds} isFavoriteDog={isFavoriteDog} onToggleFavoriteDog={handleToggleFavoriteDog} />
+                {
+                  (loading && dogSearchResults.resultIds.length === 0) ? (
+                    <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', padding: 5 }}>
+                      <CircularProgress />
+                    </Container>
+                  ) :
+                    <DogResults dogIds={dogSearchResults.resultIds} isFavoriteDog={isFavoriteDog} onToggleFavoriteDog={handleToggleFavoriteDog} />
+                }
               </Grid>
             </Grid>
           </Grid>

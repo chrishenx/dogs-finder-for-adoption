@@ -1,10 +1,10 @@
+import { flattenMessages } from 'components/DogFinder/utils'
 import { defineMessages } from 'react-intl'
 
-const messages = defineMessages({
-  app_name: 'React Most Wanted',
+const messages = defineMessages(flattenMessages({
+  app_name: 'Dog matcher',
   sign_in: 'Sign in',
   sign_out: 'Sign out',
-  sign_up: 'Sign up',
   email: 'Email',
   name: 'Name',
   // deepcode ignore NoHardcodedPasswords: intended
@@ -25,7 +25,7 @@ const messages = defineMessages({
     * Our app makes it easy to find the perfect dog for you.
     * Start living your best life together.
   `,
-  home: 'Amaing dog finder',
+  home: 'Amazing dog finder',
   page_not_found: 'Page not found',
   settings: 'Settings',
   theme: 'Theme',
@@ -50,6 +50,58 @@ const messages = defineMessages({
   filter_demo: 'Demo filter',
   list_page_demo: 'List Page demo with {count} rows',
   my_account: 'My account',
-})
+  components: {
+    dogMatch: {
+      loading: {
+        title: 'Loading your perfecto dog!',
+      },
+      cardHeader: 'Your perfecto dog is here!',
+      cardContent: {
+        dogDescription: 'A beautiful <b>{breed}</b>, <b>{age}</b> years old is waiting for you!',
+        zipCode: 'Located at Zip Code <b>{zipCode}</b>.',
+      },
+    },
+    dogMatcher: {
+      button: 'Find my perfecto dog!',
+      modal: {
+        title: 'Looking for you perfecto dog...',
+      },
+    },
+    dogAgeSelector: {
+      ageRange: 'Age range',
+    },
+    dogCard: {
+      content: {
+        breed: 'Breed: <b>{breed}</b>',
+        age: 'Age: <b>{age}</b>',
+        zipCode: 'Zip Code: <b>{zipCode}</b>',
+      },
+      actions: {
+        remove: 'Remove',
+        add: 'Add',
+      },
+    },
+    dogFilterer: {
+      breedSelector: {
+        label: 'Breed',
+        placeholder: 'Search for a breed',
+      },
+    },
+    dogSorter: {
+      label: 'Sort by',
+      sortBy: {
+        breed: 'Breed',
+        name: 'Name',
+        age: 'Age',
+      },
+      tooltipSetAscMode: 'Set sort mode to ascending',
+      tooltipSetDescMode: 'Set sort mode to descending',
+    },
+    favoriteDogs: {
+      empty: 'Add some dogs to find you an amazing adoption match!',
+      tooltipRemoveFromFavorites: 'Remove {dogName} from favorites',
+    },
+  }
+}))
 
 export default messages

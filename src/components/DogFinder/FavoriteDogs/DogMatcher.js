@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { Box, Button, CircularProgress, Modal, Typography } from '@mui/material';
 import { useRequest } from 'hooks/useRequest';
 import { DogMatch } from './DogMatch';
+import { useIntl } from 'react-intl';
 
 function DogMatcher({ dogIds }) {
+  const intl = useIntl()
   const [open, setOpen] = useState(false);
   const { data: { match: matchedDogId }, loading, performRequest } = useRequest('/dogs/match', { match: null }, {
     method: 'POST',
@@ -22,7 +24,7 @@ function DogMatcher({ dogIds }) {
   return (
     <>
       <Button fullWidth variant="outlined" color="primary" onClick={generateMatch}>
-        Find my perfecto dog!
+        {intl.formatMessage({ id: 'components.dogMatcher.button' })}
       </Button>
       <Modal
         open={open}
@@ -37,7 +39,7 @@ function DogMatcher({ dogIds }) {
           {loading ? (
             <Box>
               <Typography variant="h6" component="h2">
-                Looking for you perfecto dog...
+                {intl.formatMessage({ id: 'components.dogMatcher.loading.title' })}
               </Typography>
               <CircularProgress />
             </Box>

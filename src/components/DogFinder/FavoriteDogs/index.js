@@ -7,23 +7,24 @@ import { useRequest } from "hooks/useRequest";
 import { getDogImgAltText } from "../utils";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import DogMatcher from "./DogMatcher";
+import { useIntl } from "react-intl";
 
 /**
  * @param {Object} props
- * @param {Set} props.favoriteDogIds - An set of favorite dog ids.
+ * @param {Set} props.favoriteDogIds - A set of favorite dog ids.
  * @param {function} props.onRemoveFavoriteDog - A function to remove a favorite dog.
- * @returns {JSX.Element} - React component representing the list of favorite dogs.
  */
 export const FavoriteDogs = ({ favoriteDogIds, onRemoveFavoriteDog }) => {
-  const { data: favoriteDogs, loading } = useRequest('/dogs', [], { method: 'POST', body: [...favoriteDogIds] })
+  const intl = useIntl()
+  const { data: favoriteDogs } = useRequest('/dogs', [], { method: 'POST', body: [...favoriteDogIds] })
 
   return (
     <Box>
       <Typography variant="h6" component="h2">Favorite Dogs</Typography>
       {
         favoriteDogIds.size === 0 ?
-          <Typography variant="body1" component="p" gutterBottom>
-            Add some goods to find you an amazing adoption match!
+          <Typography variant="caption" component="p" gutterBottom fontSize="1.1em">
+            {intl.formatMessage({ id: 'components.favoriteDogs.empty' })}
           </Typography>
           :
           <List sx={{ bgcolor: 'background.paper' }}>
@@ -34,8 +35,8 @@ export const FavoriteDogs = ({ favoriteDogIds, onRemoveFavoriteDog }) => {
                 </ListItemAvatar>
                 <ListItemText sx={{ marginLeft: 1 }} primary={dog.name} secondary={dog.breed} />
                 <ListItemSecondaryAction>
-                  <Tooltip title={`Remove ${dog.name} from favorites`} arrow placement="top">
-                    <IconButton color="secondary" edge="end" aria-label="Remove value from favorites" onClick={() => onRemoveFavoriteDog(dog)}>
+                  <Tooltip title={intl.formatMessage({ id: 'components.favoriteDogs.tooltipRemoveFromFavorites' }, { dogName: dog.name })} arrow placement="top">
+                    <IconButton color="secondary" edge="end" onClick={() => onRemoveFavoriteDog(dog)}>
                       <HeartBrokenIcon />
                     </IconButton>
                   </Tooltip>
