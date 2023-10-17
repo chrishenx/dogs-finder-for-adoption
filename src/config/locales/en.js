@@ -19,8 +19,6 @@ const messages = defineMessages(flattenMessages({
     * Filter by breed.
     * Add your favorites to a list.
     * Generate a match based on your favorites.
-* **Stay organized and productive.**
-    * Keep track of your favorite dogs and matches in one place.
 * **Have fun and find your furry best friend.**
     * Our app makes it easy to find the perfect dog for you.
     * Start living your best life together.
@@ -38,17 +36,6 @@ const messages = defineMessages(flattenMessages({
   menu: 'Menu',
   menu_mini_mode: 'Mini menu',
   offline: 'Offline',
-  demos: 'Demos',
-  dialog_demo: 'Demo dialog',
-  dialog_title: 'Dialog title',
-  dialog_action: 'YES, Delete',
-  dialog_message: `Dialog message. You can put as much text as you want here. 
-  Ask a question or show a warning before deleting something. 
-  You can also set the action text to something like "YES, Delete" and run that action by passing a "handleAction" prop. 
-  This receives a "handleClose" callback with which you can close the dialog when your action is done.`,
-  toast_demo: 'Demo toast',
-  filter_demo: 'Demo filter',
-  list_page_demo: 'List Page demo with {count} rows',
   my_account: 'My account',
   components: {
     dogMatch: {
@@ -98,6 +85,7 @@ const messages = defineMessages(flattenMessages({
       tooltipSetDescMode: 'Set sort mode to descending',
     },
     favoriteDogs: {
+      title: 'Favorite dogs',
       empty: 'Add some dogs to find you an amazing adoption match!',
       tooltipRemoveFromFavorites: 'Remove {dogName} from favorites',
     },

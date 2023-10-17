@@ -20,7 +20,7 @@ export const FavoriteDogs = ({ favoriteDogIds, onRemoveFavoriteDog }) => {
 
   return (
     <Box>
-      <Typography variant="h6" component="h2">Favorite Dogs</Typography>
+      <Typography variant="h6" component="h2">{intl.formatMessage({ id: 'components.favoriteDogs.title' })}</Typography>
       {
         favoriteDogIds.size === 0 ?
           <Typography variant="caption" component="p" gutterBottom fontSize="1.1em">

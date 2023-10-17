@@ -17,7 +17,7 @@ import { useRequest } from "hooks/useRequest";
 import { DogAgeRangeSelector, DogAgeRangeLimits } from "./DogAgeSelector";
 import { FavoriteDogs } from "./FavoriteDogs";
 
-const DEFAULT_DOGS_PER_PAGE = 25;
+const DEFAULT_DOGS_PER_PAGE = 24;
 
 const DogFinderView = () => {
   const [favoriteDogIds, setFavoriteDogIds] = useState(new Set());
@@ -97,6 +97,7 @@ const DogFinderView = () => {
               rowsPerPage={dogsPerPage}
               onRowsPerPageChange={handleChangeRowsPerPage}
               onPageChange={handlePageChange}
+              rowsPerPageOptions={[12, DEFAULT_DOGS_PER_PAGE, 48, 96]}
             />
           </Paper>
         </Grid>
