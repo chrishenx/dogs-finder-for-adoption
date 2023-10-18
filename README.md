@@ -16,4 +16,7 @@
 * `npm build` Build the app for production
 * `npm test` Run the test suite
 
+**TODO**
+* Migrate to Typescript.
+
   
