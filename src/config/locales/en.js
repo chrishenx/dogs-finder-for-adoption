@@ -85,7 +85,7 @@ const messages = defineMessages(flattenMessages({
       empty: "Add some dogs to find you an amazing adoption match!",
       tooltipRemoveFromFavorites: "Remove {dogName} from favorites",
     },
-  }
+  },
 }));
 
 export default messages;
