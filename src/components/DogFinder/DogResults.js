@@ -23,7 +23,13 @@ export const DogResults = ({
 
   return <>
     {dogs.map((dog) => (
-      <Grid key={dog.id} item xs={3}>
+      // xs based on theme breakpoints
+      <Grid key={dog.id}
+        item
+        lg={3}
+        md={4}
+        sm={6}
+        xs={12}>
         <DogCard dog={dog} isFavoriteDog={isFavoriteDog(dog)} onToggleFavoriteDog={onToggleFavoriteDog} />
       </Grid>
     ))}
