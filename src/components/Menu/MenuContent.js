@@ -36,7 +36,7 @@ const Menu = (props) => {
     a2HSContext,
     auth,
     ...props,
-  }).filter((item) => {
+  })?.filter((item) => {
     return item.visible !== false;
   });
 
@@ -51,7 +51,7 @@ const Menu = (props) => {
     }
   };
 
-  return (
+  return !menuItems ? null : (
     <div
       style={{
         display: "flex",

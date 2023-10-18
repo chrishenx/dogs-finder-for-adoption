@@ -1,6 +1,5 @@
 {
   "name": "dog-finder-challenge",
-  "homepage": "https://chrishenx.github.io/dogs-finder-for-adoption/",
   "version": "0.1.0",
   "private": false,
   "dependencies": {

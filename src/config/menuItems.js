@@ -66,7 +66,13 @@ const getMenuItems = (props) => {
     };
   });
 
-  if (isAuthMenuOpen || !isAuthorized) {
+  if (!isAuthorized) {
+    return [
+      {primaryText: intl.formatMessage({ id: "knowTheUniverse" }),},
+    ];
+  }
+
+  if (isAuthMenuOpen) {
     return [
       {
         value: "/my_account",

@@ -13,7 +13,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import CustomPaper from "../../components/CustomPaper";
 
-
 import { request } from "utils";
 
 const SignIn = ({ redirectTo = "/" }) => {
@@ -21,7 +20,7 @@ const SignIn = ({ redirectTo = "/" }) => {
   const intl = useIntl();
   const theme = useTheme();
   const navigate = useNavigate();
-  let location = useLocation();
+  const location = useLocation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const { toggleThis } = useMenu();

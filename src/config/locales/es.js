@@ -3,6 +3,7 @@ import { defineMessages } from "react-intl";
 import { flattenMessages } from "components/DogFinder/utils";
 
 const messages = defineMessages(flattenMessages({
+  knowTheUniverse: "Conoce el universo 🍀",
   app_name: "Awesome Dog Finder",
   cancel: "Cancel",
   sign_in: "Iniciar sesión",

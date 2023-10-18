@@ -44,7 +44,7 @@ const config = {
     offlineIndicatorHeight: 12,
     initialAuthMenuOpen: false,
     initialMiniMode: false,
-    initialMenuOpen: true,
+    initialMenuOpen: false,
     initialMobileMenuOpen: false,
     initialMiniSwitchVisibility: true,
     MenuHeader: lazy(() =>
