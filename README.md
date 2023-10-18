@@ -18,5 +18,8 @@
 
 **TODO**
 * Migrate to Typescript.
+* Remove dependency to base-shell, material-ui-shell because it has some react components/patterns that are not up-to-date.
+* Review if installation of the app would add any value.
+* Migrate to NextJS to enable custom SEO tags per route to enable server rendering, so that individual dog matches could be shared in social media, as well as specific dog cards.
 
   
