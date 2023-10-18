@@ -14,7 +14,7 @@ const routes = [
     path: "/signin",
     exact: true,
     element: (
-      <UnauthorizedRoute>
+      <UnauthorizedRoute redirectTo="/home">
         <SignIn redirectTo="/home" />
       </UnauthorizedRoute>
     ),
