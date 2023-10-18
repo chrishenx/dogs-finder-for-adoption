@@ -81,7 +81,10 @@ const DogFinderView = () => {
       <Grid container columnSpacing={2} rowSpacing={4}>
         <Grid item xs={12}>
           <Grid container columnSpacing={2}>
-            <Grid item xs={3}>
+            <Grid item
+              md={3}
+              sm={4}
+              xs={5}>
               <Stack spacing={5}>
                 <DogFilterer selectedBreeds={breeds} onSelectedBreedsChanged={setBreeds} />
                 <DogAgeRangeSelector ageRange={ageRange} onAgeRangeChanged={setAgeRange} />
@@ -93,7 +96,10 @@ const DogFinderView = () => {
                 <FavoriteDogs favoriteDogIds={favoriteDogIds} onRemoveFavoriteDog={handleToggleFavoriteDog} />
               </Stack>
             </Grid>
-            <Grid item xs={9}>
+            <Grid item
+              md={9}
+              sm={8}
+              xs={7}>
               <Grid container spacing={2}>
                 {
                   (loading && dogSearchResults.resultIds.length === 0) ? (
