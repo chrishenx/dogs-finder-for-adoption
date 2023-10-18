@@ -1,30 +1,31 @@
-import React from "react";
-import PropTypes from 'prop-types';
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import KeyboardDoubleArrowUpIcon from "@mui/icons-material/KeyboardDoubleArrowUp";
 import {
   FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  IconButton,
   Grid,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
   Tooltip,
 } from "@mui/material";
-import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
-import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
-import { createEventTargetValueExtractor } from "utils";
+import PropTypes from "prop-types";
+import React from "react";
 import { useIntl } from "react-intl";
+
+import { createEventTargetValueExtractor } from "utils";
 
 export const SortFields = {
   BREED: "breed",
   NAME: "Name",
   AGE: "Age",
   ZIP_CODE: "Zip code",
-}
+};
 
 export const SortModes = {
   DESC: "desc",
   ASC: "asc"
-}
+};
 
 /**
  * A component that allows the user to sort a list of dogs by breed, name or age.
@@ -35,32 +36,41 @@ export const SortModes = {
  * @param {Function} props.onSortByChange - A callback function to be called when the sort criteria changes.
  * @param {Function} props.onSortModeChange - A callback function to be called when the sort mode changes.
  */
-export const DogSorter = ({ sortBy, sortMode, onSortByChange, onSortModeChange }) => {
+export const DogSorter = ({
+  sortBy, sortMode, onSortByChange, onSortModeChange 
+}) => {
   const isDescSortMode = sortMode === SortModes.DESC;
-  const intl = useIntl()
+  const intl = useIntl();
 
-  const handleSortByChange = createEventTargetValueExtractor(onSortByChange)
-  const toggleSortMode = () => onSortModeChange(isDescSortMode ? SortModes.ASC : SortModes.DESC)
+  const handleSortByChange = createEventTargetValueExtractor(onSortByChange);
+  const toggleSortMode = () => onSortModeChange(isDescSortMode ? SortModes.ASC : SortModes.DESC);
 
   return (
     <Grid container >
       <Grid item xs={9}>
         <FormControl fullWidth>
-          <InputLabel>{intl.formatMessage({ id: 'components.dogSorter.label' })}</InputLabel>
+          <InputLabel>{intl.formatMessage({ id: "components.dogSorter.label" })}</InputLabel>
           <Select
-            label={intl.formatMessage({ id: 'components.dogSorter.label' })}
+            label={intl.formatMessage({ id: "components.dogSorter.label" })}
             value={sortBy}
             onChange={handleSortByChange}
           >
-            <MenuItem value="breed">{intl.formatMessage({ id: 'components.dogSorter.sortBy.breed' })}</MenuItem>
-            <MenuItem value="name">{intl.formatMessage({ id: 'components.dogSorter.sortBy.name' })}</MenuItem>
-            <MenuItem value="age">{intl.formatMessage({ id: 'components.dogSorter.sortBy.age' })}</MenuItem>
+            <MenuItem value="breed">{intl.formatMessage({ id: "components.dogSorter.sortBy.breed" })}</MenuItem>
+            <MenuItem value="name">{intl.formatMessage({ id: "components.dogSorter.sortBy.name" })}</MenuItem>
+            <MenuItem value="age">{intl.formatMessage({ id: "components.dogSorter.sortBy.age" })}</MenuItem>
           </Select>
         </FormControl>
       </Grid>
       <Grid item xs={1}><div></div></Grid>
       <Grid item xs={2}>
-        <Tooltip title={isDescSortMode ? intl.formatMessage({ id: 'components.dogSorter.tooltipSetAscMode' }) : intl.formatMessage({ id: 'components.dogSorter.tooltipSetDescMode' })} arrow placement="top">
+        <Tooltip 
+          arrow
+          placement="top"
+          title={isDescSortMode ? 
+            intl.formatMessage({ id: "components.dogSorter.tooltipSetAscMode" }) 
+            : 
+            intl.formatMessage({ id: "components.dogSorter.tooltipSetDescMode" })
+          }>
           <IconButton onClick={toggleSortMode}>
             {
               isDescSortMode ? <KeyboardDoubleArrowUpIcon /> : <KeyboardDoubleArrowDownIcon />

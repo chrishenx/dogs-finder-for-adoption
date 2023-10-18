@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import {
   Autocomplete,
   CircularProgress,
   TextField,
 } from "@mui/material";
-import { useRequest } from "hooks/useRequest";
+import PropTypes from "prop-types";
+import React from "react";
 import { useIntl } from "react-intl";
+
+import { useRequest } from "hooks/useRequest";
 
 /* I wasn't able to search dogs by multiple breeds so that's why I allowed a single value in this autocomplete */
 
@@ -18,8 +19,8 @@ import { useIntl } from "react-intl";
  * @returns {JSX.Element} - The DogFilterer component.
  */
 export const DogFilterer = ({ selectedBreeds, onSelectedBreedsChanged }) => {
-  const intl = useIntl()
-  const { data: breeds, loading } = useRequest('/dogs/breeds', [])
+  const intl = useIntl();
+  const { data: breeds, loading } = useRequest("/dogs/breeds", []);
 
   const handleBreedSelectionChanged = (_, newSelectedBreeds) => onSelectedBreedsChanged(newSelectedBreeds);
 
@@ -29,16 +30,16 @@ export const DogFilterer = ({ selectedBreeds, onSelectedBreedsChanged }) => {
     ) :
       <Autocomplete
         options={breeds}
-        value={selectedBreeds}
-        onChange={handleBreedSelectionChanged}
         renderInput={params => (
           <TextField
             {...params}
+            label={intl.formatMessage({ id: "components.dogFilterer.breedSelector.label" })}
+            placeholder={intl.formatMessage({ id: "components.dogFilterer.breedSelector.placeholder" })}
             variant="standard"
-            label={intl.formatMessage({ id: 'components.dogFilterer.breedSelector.label' })}
-            placeholder={intl.formatMessage({ id: 'components.dogFilterer.breedSelector.placeholder' })}
           />
         )}
+        value={selectedBreeds}
+        onChange={handleBreedSelectionChanged}
       />
   );
 };

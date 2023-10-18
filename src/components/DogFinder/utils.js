@@ -16,21 +16,21 @@ export function getDogImgAltText(dog) {
  * @param {string} [prefix=''] - The prefix to add to the keys of the flattened object.
  * @returns {Object} - The flattened object of messages.
  */
-export function flattenMessages(nestedMessages, prefix = '') {
+export function flattenMessages(nestedMessages, prefix = "") {
   return Object.keys(nestedMessages).reduce((messages, key) => {
-    let value = nestedMessages[key]
-    let prefixedKey = prefix ? `${prefix}.${key}` : key
+    let value = nestedMessages[key];
+    let prefixedKey = prefix ? `${prefix}.${key}` : key;
 
-    if (typeof value === 'string') {
-      messages[prefixedKey] = value
+    if (typeof value === "string") {
+      messages[prefixedKey] = value;
     } else {
-      Object.assign(messages, flattenMessages(value, prefixedKey))
+      Object.assign(messages, flattenMessages(value, prefixedKey));
     }
 
-    return messages
-  }, {})
+    return messages;
+  }, {});
 }
 
 export function intlBoldify(chunks) {
-  return <b>{chunks}</b>
+  return <b>{chunks}</b>;
 }

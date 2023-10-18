@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-key */
-import React, { lazy } from 'react'
-import AuthorizedRoute from 'base-shell/lib/components/AuthorizedRoute'
-import UnauthorizedRoute from 'base-shell/lib/components/UnauthorizedRoute'
+import AuthorizedRoute from "base-shell/lib/components/AuthorizedRoute";
+import UnauthorizedRoute from "base-shell/lib/components/UnauthorizedRoute";
+import React, { lazy } from "react";
 
-const SignIn = lazy(() => import('../pages/SignIn/SignIn'))
+const SignIn = lazy(() => import("../pages/SignIn/SignIn"));
 
-const About = lazy(() => import('../pages/About'))
-const Home = lazy(() => import('../pages/Home/Home'))
-const MyAccount = lazy(() => import('../pages/MyAccount/MyAccount'))
+const About = lazy(() => import("../pages/About"));
+const Home = lazy(() => import("../pages/Home/Home"));
+const MyAccount = lazy(() => import("../pages/MyAccount/MyAccount"));
 
 const routes = [
   {
-    path: '/signin',
+    path: "/signin",
     exact: true,
     element: (
       <UnauthorizedRoute>
@@ -20,12 +20,12 @@ const routes = [
     ),
   },
   {
-    path: '/about',
+    path: "/about",
     exact: true,
     element: <About />,
   },
   {
-    path: '/my_account',
+    path: "/my_account",
     exact: true,
     element: (
       <AuthorizedRoute>
@@ -34,7 +34,7 @@ const routes = [
     ),
   },
   {
-    path: '/home',
+    path: "/home",
     exact: true,
     element: (
       <AuthorizedRoute>
@@ -42,6 +42,6 @@ const routes = [
       </AuthorizedRoute>
     ),
   },
-]
+];
 
-export default routes
+export default routes;

@@ -9,8 +9,8 @@ export function createEventTargetValueExtractor(valueSetter) {
 
 export function createEventTargetCheckedMapper(valueSetter, valueIfTrue, valueIfFalse) {
   return (event) => {
-    valueSetter(event.target.checked ? valueIfTrue : valueIfFalse)
-  }
+    valueSetter(event.target.checked ? valueIfTrue : valueIfFalse);
+  };
 }
 
 /**
@@ -23,14 +23,12 @@ export function createEventTargetCheckedMapper(valueSetter, valueIfTrue, valueIf
 export async function request(path, params = {}) {
   const url = new URL(path, config.baseUrl);
   if (params.search) {
-    url.search = new URLSearchParams(params.search).toString()
+    url.search = new URLSearchParams(params.search).toString();
   }
   const response = await fetch(url, {
     body: JSON.stringify(params.body),
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    credentials: "include",
+    headers: {"Content-Type": "application/json",},
     method: params.method,
   });
   return response;
@@ -42,11 +40,11 @@ export async function request(path, params = {}) {
  * @returns {string} The first two letters of the input string.
  */
 export function extractFirstLetters(string) {
-  const words = string.split(" ")
+  const words = string.split(" ");
   if (words.length < 1) {
-    return ""
+    return "";
   }
 
-  const firstLetters = words.map((word) => word[0])
-  return firstLetters.slice(0, 2).join("")
+  const firstLetters = words.map((word) => word[0]);
+  return firstLetters.slice(0, 2).join("");
 }

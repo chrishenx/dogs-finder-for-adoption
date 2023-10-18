@@ -1,50 +1,55 @@
-import { Avatar, Paper, Typography } from '@mui/material'
-import { Person as PersonIcon } from '@mui/icons-material'
-import Page from 'material-ui-shell/lib/containers/Page/Page'
-import React from 'react'
-import { useAuth } from 'base-shell/lib/providers/Auth'
-import { useIntl } from 'react-intl'
-import { extractFirstLetters } from 'utils'
+import { Person as PersonIcon } from "@mui/icons-material";
+import {
+  Avatar, Paper, Typography 
+} from "@mui/material";
+import { useAuth } from "base-shell/lib/providers/Auth";
+import Page from "material-ui-shell/lib/containers/Page/Page";
+import React from "react";
+import { useIntl } from "react-intl";
+
+import { extractFirstLetters } from "utils";
 
 const MyAccount = () => {
-  const intl = useIntl()
+  const intl = useIntl();
 
-  const { auth } = useAuth()
+  const { auth } = useAuth();
   const {
-    name = '',
-    email = '',
-  } = auth || {}
+    name = "",
+    email = "",
+  } = auth || {};
 
   return (
     <Page
       pageTitle={intl.formatMessage({
-        id: 'my_account',
-        defaultMessage: 'My Account',
+        id: "my_account",
+        defaultMessage: "My Account",
       })}
     >
       <div
         style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100%',
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100%",
         }}
       >
         <Paper
           elevation={3}
           style={{
-            position: 'relative',
+            position: "relative",
             borderRadius: 18,
-            display: 'flex',
-            justifyContent: 'flex-start',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "flex-start",
+            flexDirection: "column",
+            alignItems: "center",
             padding: "1em"
           }}
         >
           <Avatar
-            style={{ width: 120, height: 120, marginTop: -40 }}
             alt="User Picture"
+            style={{
+              width: 120, height: 120, marginTop: -40 
+            }}
           >
             {name ? extractFirstLetters(name) : <PersonIcon />}
           </Avatar>
@@ -53,7 +58,7 @@ const MyAccount = () => {
         </Paper>
       </div>
     </Page>
-  )
-}
+  );
+};
 
-export default MyAccount
+export default MyAccount;

@@ -1,27 +1,29 @@
-import { lazy } from 'react'
-import locales from './locales'
-import routes from './routes'
-import themes from './themes'
-import parseLanguages from 'base-shell/lib/utils/locale'
-import Loading from '../components/Loading/Loading'
+import parseLanguages from "base-shell/lib/utils/locale";
+import { lazy } from "react";
+
+import Loading from "../components/Loading/Loading";
+
+import locales from "./locales";
+import routes from "./routes";
+import themes from "./themes";
 
 const config = {
   containers: {
     LayoutContainer: lazy(() =>
-      import('material-ui-shell/lib/containers/LayoutContainer/LayoutContainer')
+      import("material-ui-shell/lib/containers/LayoutContainer/LayoutContainer")
     ),
   },
   components: {
     Loading,
-    Menu: lazy(() => import('material-ui-shell/lib/containers/Menu/Menu')),
+    Menu: lazy(() => import("material-ui-shell/lib/containers/Menu/Menu")),
   },
-  baseUrl: 'https://frontend-take-home-service.fetch.com',
+  baseUrl: "https://frontend-take-home-service.fetch.com",
   api: {
-    signIn: '/auth/login',
-    breeds: '/breeds',
-    dogSearch: '/dogs/search',
-    dogDetails: '/dogs',
-    dogMatch: '/dogs/match',
+    signIn: "/auth/login",
+    breeds: "/breeds",
+    dogSearch: "/dogs/search",
+    dogDetails: "/dogs",
+    dogMatch: "/dogs/match",
   },
   pwa: {
     useiOSPWAPrompt: true,
@@ -30,11 +32,11 @@ const config = {
   routes,
   locale: {
     locales,
-    defaultLocale: parseLanguages(['en', 'es'], 'en'),
-    onError: (e) => {
+    defaultLocale: parseLanguages(["en", "es"], "en"),
+    onError: (error) => {
       // Here we warn the user about translation error
-      //console.warn(e)
-      return
+      console.warn("Translation error: ", error);
+      return;
     },
   },
   menu: {
@@ -46,21 +48,21 @@ const config = {
     initialMobileMenuOpen: false,
     initialMiniSwitchVisibility: true,
     MenuHeader: lazy(() =>
-      import('material-ui-shell/lib/components/MenuHeader/MenuHeader')
+      import("material-ui-shell/lib/components/MenuHeader/MenuHeader")
     ),
-    MenuContent: lazy(() => import('../components/Menu/MenuContent')),
+    MenuContent: lazy(() => import("../components/Menu/MenuContent")),
     useWindowWatcher: false,
   },
   theme: {
     themes,
-    defaultThemeID: 'default',
+    defaultThemeID: "default",
     defaultIsDarkMode: false,
     defaultIsRTL: false, //change this to true for default Right to Left Language support
   },
   pages: {
-    LandingPage: lazy(() => import('../pages/LandingPage/LandingPage')),
-    PageNotFound: lazy(() => import('../pages/PageNotFound/PageNotFound')),
+    LandingPage: lazy(() => import("../pages/LandingPage/LandingPage")),
+    PageNotFound: lazy(() => import("../pages/PageNotFound/PageNotFound")),
   },
-}
+};
 
-export default config
+export default config;

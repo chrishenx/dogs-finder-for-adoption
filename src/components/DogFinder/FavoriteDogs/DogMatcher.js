@@ -1,50 +1,61 @@
-import { useState } from 'react';
-import { Box, Button, CircularProgress, Modal, Typography } from '@mui/material';
-import { useRequest } from 'hooks/useRequest';
-import { DogMatch } from './DogMatch';
-import { useIntl } from 'react-intl';
-import { useConfig } from 'base-shell/lib/providers/Config';
+import {
+  Box, Button, CircularProgress, Modal, Typography 
+} from "@mui/material";
+import { useConfig } from "base-shell/lib/providers/Config";
+import { useState } from "react";
+import { useIntl } from "react-intl";
+
+import { DogMatch } from "./DogMatch";
+
+import { useRequest } from "hooks/useRequest";
+
+
 
 function DogMatcher({ dogIds }) {
-  const { appConfig } = useConfig()
-  const intl = useIntl()
+  const { appConfig } = useConfig();
+  const intl = useIntl();
   const [open, setOpen] = useState(false);
-  const { data: { match: matchedDogId }, loading, performRequest } = useRequest(appConfig.api.dogMatch, { match: null },
+  const {
+    data: { match: matchedDogId }, loading, performRequest 
+  } = useRequest(appConfig.api.dogMatch, { match: null },
     {
-      method: 'POST',
+      method: "POST",
       body: [...dogIds]
     },
     true
   );
 
   const generateMatch = () => {
-    setOpen(true)
+    setOpen(true);
     performRequest();
   };
 
   const handleClose = () => {
     setOpen(false);
-  }
+  };
 
   return (
     <>
-      <Button fullWidth variant="outlined" color="primary" onClick={generateMatch}>
-        {intl.formatMessage({ id: 'components.dogMatcher.button' })}
+      <Button fullWidth
+        color="primary"
+        variant="outlined"
+        onClick={generateMatch}>
+        {intl.formatMessage({ id: "components.dogMatcher.button" })}
       </Button>
       <Modal
         open={open}
-        onClose={handleClose}
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
+        onClose={handleClose}
       >
         <>
           {loading ? (
             <Box>
-              <Typography variant="h6" component="h2">
-                {intl.formatMessage({ id: 'components.dogMatcher.loading.title' })}
+              <Typography component="h2" variant="h6">
+                {intl.formatMessage({ id: "components.dogMatcher.loading.title" })}
               </Typography>
               <CircularProgress />
             </Box>

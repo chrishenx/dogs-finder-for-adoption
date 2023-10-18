@@ -1,26 +1,22 @@
-import red from '@mui/material/colors/red'
-import green from '@mui/material/colors/green'
-import pink from '@mui/material/colors/pink'
-import deepPurple from "@mui/material/colors/deepPurple"
+import deepPurple from "@mui/material/colors/deepPurple";
+import green from "@mui/material/colors/green";
+import pink from "@mui/material/colors/pink";
+import red from "@mui/material/colors/red";
 
 const themes = [
   {
-    id: 'default',
+    id: "default",
     color: deepPurple[500],
     source: {
       palette: {
-        primary: {
-          main: "#6504b5",
-        },
-        secondary: {
-          main: "#4169E1",
-        },
+        primary: {main: "#6504b5",},
+        secondary: {main: "#4169E1",},
         error: red,
       },
     },
   },
   {
-    id: 'red',
+    id: "red",
     color: red[500],
     source: {
       palette: {
@@ -31,7 +27,7 @@ const themes = [
     },
   },
   {
-    id: 'green',
+    id: "green",
     color: green[500],
     source: {
       palette: {
@@ -41,6 +37,6 @@ const themes = [
       },
     },
   },
-]
+];
 
-export default themes
+export default themes;

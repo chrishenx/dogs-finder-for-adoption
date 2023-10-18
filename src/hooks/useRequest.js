@@ -1,7 +1,8 @@
-import { useAuth } from 'base-shell/lib/providers/Auth';
-import { useEffect, useState } from 'react';
-import { useDeepCompareCallback } from 'use-deep-compare';
-import { request } from 'utils';
+import { useAuth } from "base-shell/lib/providers/Auth";
+import { useEffect, useState } from "react";
+import { useDeepCompareCallback } from "use-deep-compare";
+
+import { request } from "utils";
 
 /**
  * @param {string} path
@@ -15,7 +16,7 @@ export function useRequest(path, initialData, params = {}, manual = false) {
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(!manual);
   const [error, setError] = useState(null);
-  const { setAuth } = useAuth()
+  const { setAuth } = useAuth();
 
   const fetchData = useDeepCompareCallback(async () => {
     try {
@@ -24,7 +25,7 @@ export function useRequest(path, initialData, params = {}, manual = false) {
         setData(await response.json());
       } else {
         if (response.status === 401) {
-          setAuth({ isAuthenticated: false })
+          setAuth({ isAuthenticated: false });
         }
         throw new Error(`Error! status: ${response.status}`);
       }
@@ -41,5 +42,7 @@ export function useRequest(path, initialData, params = {}, manual = false) {
     }
   }, [fetchData, manual]);
 
-  return { data, loading, error, performRequest: fetchData };
+  return {
+    data, loading, error, performRequest: fetchData 
+  };
 }

@@ -1,12 +1,12 @@
-import React from "react";
 import { Slider, Stack } from "@mui/material";
 import PropTypes from "prop-types";
+import React from "react";
 import { useIntl } from "react-intl";
 
 export const DogAgeRangeLimits = {
   MIN: 0,
   MAX: 20,
-}
+};
 
 /**
  * A component that allows the user to select a range of dog ages.
@@ -18,21 +18,24 @@ export const DogAgeRangeLimits = {
  * @param {Function} props.onAgeRangeChanged - A callback function to be called when the age range changes.
  */
 export const DogAgeRangeSelector = ({ ageRange, onAgeRangeChanged }) => {
-  const intl = useIntl()
+  const intl = useIntl();
 
   const handleAgeRangeChange = (_, newValue) => {
-    onAgeRangeChanged({ageMin: newValue[0], ageMax: newValue[1]})
+    onAgeRangeChanged({ageMin: newValue[0], ageMax: newValue[1]});
   };
 
   return (
     <Stack spacing={1}>
-      <label>{intl.formatMessage({ id: 'components.dogAgeSelector.ageRange' })}:</label>
+      <label>
+        {intl.formatMessage({ id: "components.dogAgeSelector.ageRange" })}
+:
+      </label>
       <Slider
-        min={DogAgeRangeLimits.MIN}
         max={DogAgeRangeLimits.MAX}
+        min={DogAgeRangeLimits.MIN}
         value={[ageRange.ageMin, ageRange.ageMax]}
-        onChange={handleAgeRangeChange}
         valueLabelDisplay="auto"
+        onChange={handleAgeRangeChange}
       />
     </Stack>
   );
