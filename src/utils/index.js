@@ -1,3 +1,6 @@
+
+import { sha256 } from "js-sha256";
+
 import config from "../config";
 
 
@@ -47,4 +50,11 @@ export function extractFirstLetters(string) {
 
   const firstLetters = words.map((word) => word[0]);
   return firstLetters.slice(0, 2).join("");
+}
+
+
+export function createCachingKey(blob) {
+  var hash = sha256.create();
+  hash.update(JSON.stringify(blob));
+  return hash.hex();
 }

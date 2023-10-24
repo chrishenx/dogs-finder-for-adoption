@@ -2,7 +2,7 @@ import { useAuth } from "base-shell/lib/providers/Auth";
 import { useEffect, useState } from "react";
 import { useDeepCompareCallback } from "use-deep-compare";
 
-import { request } from "utils";
+import { createCachingKey, request } from "utils";
 
 /**
  * @param {string} path
@@ -12,7 +12,7 @@ import { request } from "utils";
  * @param {Object} params.body
  * @param {('GET' | 'POST' | 'PUT')} params.method
  */
-export function useRequest(path, initialData, params = {}, manual = false) {
+export function useRequest(path, initialData, params = {}, manual = false, cached = false) {
   const [data, setData] = useState(initialData);
   const [loading, setLoading] = useState(!manual);
   const [error, setError] = useState(null);
@@ -20,9 +20,27 @@ export function useRequest(path, initialData, params = {}, manual = false) {
 
   const fetchData = useDeepCompareCallback(async () => {
     try {
+      let cachedResponse = null;
+      
+      const cachingBlob = {path, params};
+      const cachingKey = createCachingKey(cachingBlob);
+      if (cached) {
+        const rawCachedResponse = localStorage.getItem(cachingKey);
+        if (rawCachedResponse) {
+          cachedResponse = JSON.parse(rawCachedResponse);
+          setData(cachedResponse);
+          setLoading(false);
+          return;
+        }
+      }
+
       const response = await request(path, params);
       if (response.status === 200) {
-        setData(await response.json());
+        const jsonResponse = await response.json();
+        if (cached) {
+          localStorage.setItem(cachingKey, JSON.stringify(jsonResponse));
+        }
+        setData(jsonResponse);
       } else {
         if (response.status === 401) {
           setAuth({ isAuthenticated: false });

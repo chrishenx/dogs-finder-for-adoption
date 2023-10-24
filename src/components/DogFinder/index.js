@@ -50,11 +50,25 @@ const DogFinderView = () => {
       ...(breeds?.length ? { breeds } : {}),
       ...ageRange
     }
-  });
+  }, false, true);
+
+  const resetPagination = () => {
+    setCurrentPage(0);
+  };
+  
+  const handleSortByChange = (newSortBy) => {
+    setSortBy(newSortBy);
+    resetPagination();
+  };
+
+  const handleSortModeChange = (newSortMode) => {
+    setSortMode(newSortMode);
+    resetPagination();
+  };
 
   const handleChangeRowsPerPage = createEventTargetValueExtractor(value => {
     setDogsPerPage(Number.parseInt(value));
-    setCurrentPage(0);
+    resetPagination();
   });
 
   const handlePageChange = (_, value) => {
@@ -90,8 +104,8 @@ const DogFinderView = () => {
                 <DogAgeRangeSelector ageRange={ageRange} onAgeRangeChanged={setAgeRange} />
                 <DogSorter sortBy={sortBy}
                   sortMode={sortMode}
-                  onSortByChange={setSortBy}
-                  onSortModeChange={setSortMode} />
+                  onSortByChange={handleSortByChange}
+                  onSortModeChange={handleSortModeChange} />
                 <Divider />
                 <FavoriteDogs favoriteDogIds={favoriteDogIds} onRemoveFavoriteDog={handleToggleFavoriteDog} />
               </Stack>
